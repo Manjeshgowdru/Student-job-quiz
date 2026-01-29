@@ -45,11 +45,38 @@
         .btn-yes { background: #00ff00; color: #000; box-shadow: 8px 8px 0 #006600; }
         .btn-maybe { background: #ffff00; color: #000; box-shadow: 8px 8px 0 #999900; }
         .btn-no { background: #ff00ff; color: #fff; box-shadow: 8px 8px 0 #660066; }
+        .btn-music { background: #00ffff; color: #000; box-shadow: 8px 8px 0 #006666; font-size: 16px; padding: 15px; }
         #quiz-screen, #result-screen { display: none; }
         .job-icon { font-size: 100px; filter: drop-shadow(0 0 20px #fff); margin: 20px 0; }
+        .music-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #00ffff;
+            color: #000;
+            border: 3px solid #fff;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 5px 5px 0 #006666;
+        }
+        .music-toggle:active {
+            transform: translate(3px, 3px);
+            box-shadow: 2px 2px 0 #006666;
+        }
     </style>
 </head>
 <body>
+
+<!-- Background Music -->
+<audio id="bg-music" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/10/audio_4a456382cf.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Music Toggle Button (stays visible throughout) -->
+<button class="music-toggle" onclick="toggleMusic()" id="music-btn">🔇 MUSIC</button>
 
 <div class="container">
     <div id="welcome-screen">
@@ -94,6 +121,21 @@
     let step = 0;
     let scores = { dr:0, tea:0, dan:0, pol:0, sol:0 };
     let userName = "";
+    let musicPlaying = false;
+
+    function toggleMusic() {
+        const music = document.getElementById("bg-music");
+        const btn = document.getElementById("music-btn");
+        if (musicPlaying) {
+            music.pause();
+            btn.innerText = "🔇 MUSIC";
+            musicPlaying = false;
+        } else {
+            music.play().catch(e => console.log("Music play failed:", e));
+            btn.innerText = "🔊 MUSIC";
+            musicPlaying = true;
+        }
+    }
 
     function fireConfetti() {
         confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#00ff00', '#ff00ff', '#ffff00'] });
@@ -105,6 +147,11 @@
         document.getElementById("quiz-screen").style.display = "block";
         document.getElementById("q-text").innerText = questions[0];
         fireConfetti(); // Start with a bang!
+        
+        // Auto-start music when quiz begins
+        if (!musicPlaying) {
+            toggleMusic();
+        }
     }
 
     function answer(pts) {
