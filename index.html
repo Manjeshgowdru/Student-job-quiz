@@ -25,6 +25,14 @@
             4%, 60% { transform: translate(-2px,0) skew(0deg); }
             62% { transform: translate(0,0) skew(5deg); }
         }
+        .presented-by {
+            font-size: 16px;
+            color: #00ff00;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
         input { 
             width: 100%; padding: 20px; margin: 20px 0; border: 4px solid #fff; background: transparent; 
             color: #00ff00; font-size: 20px; border-radius: 0;
@@ -45,6 +53,7 @@
 
 <div class="container">
     <div id="welcome-screen">
+        <div class="presented-by">Presented by DAM Team</div>
         <h1 class="glitch">CAREER Goal⚡ </h1>
         <p style="margin-top:10px; color: #ffff00;">ONLY FOR 14-19 YEARS OLD</p>
         <input type="text" id="student-name" placeholder="YOUR NAME HERE">
@@ -100,11 +109,11 @@
     }
 
     function answer(pts) {
-        if (step==0 || step==8) scores.dr += pts;
-        if (step==4 || step==7) scores.tea += pts;
-        if (step==3 || step==9) scores.dan += pts;
-        if (step==5 || step==11) scores.pol += pts;
-        if (step==2 || step==6 || step==10) scores.sol += pts;
+        if (step==0 || step==8) scores.dr += pts;      // Questions 1, 9
+        if (step==4 || step==7) scores.tea += pts;     // Questions 5, 8
+        if (step==3 || step==9) scores.dan += pts;     // Questions 4, 10
+        if (step==5 || step==11) scores.pol += pts;    // Questions 6, 12
+        if (step==2 || step==6) scores.sol += pts;     // Questions 3, 7 (FIXED - removed step 10)
 
         fireConfetti(); // Explosion on every answer!
         step++;
