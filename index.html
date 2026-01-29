@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>⚡ EPIC CAREER QUIZ ⚡</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Arial Black', sans-serif; 
+            background: #000; /* Dark background makes neons pop */
+            overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 100vh;
+        }
+        .container { 
+            background: #1a1a1a; width: 95%; max-width: 420px; padding: 40px 20px; border-radius: 0px; 
+            border: 5px solid #00ff00; /* Neon Green border */
+            box-shadow: 15px 15px 0px #ff00ff; /* Neo-brutalist pink shadow */
+            text-align: center; position: relative; color: #fff;
+        }
+        /* Glitch Animation for Title */
+        .glitch { font-size: 38px; color: #fff; text-transform: uppercase; animation: glitch 1s linear infinite; }
+        @keyframes glitch {
+            2%, 64% { transform: translate(2px,0) skew(0deg); }
+            4%, 60% { transform: translate(-2px,0) skew(0deg); }
+            62% { transform: translate(0,0) skew(5deg); }
+        }
+        input { 
+            width: 100%; padding: 20px; margin: 20px 0; border: 4px solid #fff; background: transparent; 
+            color: #00ff00; font-size: 20px; border-radius: 0;
+        }
+        .btn { 
+            padding: 22px; border: none; font-size: 22px; font-weight: 900; cursor: pointer; 
+            width: 100%; text-transform: uppercase; transition: 0.1s; margin-top: 15px;
+        }
+        .btn:active { transform: translate(5px, 5px); box-shadow: none; }
+        .btn-yes { background: #00ff00; color: #000; box-shadow: 8px 8px 0 #006600; }
+        .btn-maybe { background: #ffff00; color: #000; box-shadow: 8px 8px 0 #999900; }
+        .btn-no { background: #ff00ff; color: #fff; box-shadow: 8px 8px 0 #660066; }
+        #quiz-screen, #result-screen { display: none; }
+        .job-icon { font-size: 100px; filter: drop-shadow(0 0 20px #fff); margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="welcome-screen">
+        <h1 class="glitch">CAREER Goal⚡ </h1>
+        <p style="margin-top:10px; color: #ffff00;">ONLY FOR 14-19 YEARS OLD</p>
+        <input type="text" id="student-name" placeholder="YOUR NAME HERE">
+        <input type="number" id="student-age" placeholder="YOUR AGE">
+        <button class="btn btn-yes" onclick="startQuiz()">LFG! START! 🚀</button>
+    </div>
+
+    <div id="quiz-screen">
+        <div id="q-text" style="font-size: 26px; line-height: 1.2; margin-bottom: 30px;"></div>
+        <button class="btn btn-yes" onclick="answer(3)">YES! 😍</button>
+        <button class="btn btn-maybe" onclick="answer(2)">MAYBE 😐</button>
+        <button class="btn btn-no" onclick="answer(1)">NO ❌</button>
+    </div>
+
+    <div id="result-screen">
+        <div class="job-icon" id="res-icon"></div>
+        <h2 id="res-title" style="font-size: 32px; color: #00ff00;"></h2>
+        <p id="res-desc" style="font-size: 20px; margin: 15px 0;"></p>
+        <button class="btn btn-yes" onclick="location.reload()">REPLAY 🔄</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        "DO YOU LIKE HELPING SICK PEOPLE? 🏥",
+        "DO YOU LIKE TALKING TO CROWDS? 🎤",
+        "ARE YOU ALWAYS ON TIME? 🕒",
+        "DO YOU LOVE DANCING/ART? 💃",
+        "CAN YOU EXPLAIN STUFF TO FRIENDS? 📚",
+        "WANT TO BE A BOSS/LEADER? ⚖️",
+        "DO YOU LIKE BEING STRONG? 💪",
+        "DO YOU LOVE LEARNING NEW TRICKS? 📖",
+        "CAN YOU FIX BROKEN STUFF? 🛠️",
+        "DO YOU WANT TO BE FAMOUS? 📸",
+        "DO YOU LIKE WEARING UNIFORMS? 👮",
+        "DO YOU LOVE WINNING ARGUMENTS? 🗣️"
+    ];
+
+    let step = 0;
+    let scores = { dr:0, tea:0, dan:0, pol:0, sol:0 };
+    let userName = "";
+
+    function fireConfetti() {
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#00ff00', '#ff00ff', '#ffff00'] });
+    }
+
+    function startQuiz() {
+        userName = document.getElementById("student-name").value || "PLAYER";
+        document.getElementById("welcome-screen").style.display = "none";
+        document.getElementById("quiz-screen").style.display = "block";
+        document.getElementById("q-text").innerText = questions[0];
+        fireConfetti(); // Start with a bang!
+    }
+
+    function answer(pts) {
+        if (step==0 || step==8) scores.dr += pts;
+        if (step==4 || step==7) scores.tea += pts;
+        if (step==3 || step==9) scores.dan += pts;
+        if (step==5 || step==11) scores.pol += pts;
+        if (step==2 || step==6 || step==10) scores.sol += pts;
+
+        fireConfetti(); // Explosion on every answer!
+        step++;
+        if (step < questions.length) {
+            document.getElementById("q-text").innerText = questions[step];
+        } else {
+            showResult();
+        }
+    }
+
+    function showResult() {
+        document.getElementById("quiz-screen").style.display = "none";
+        document.getElementById("result-screen").style.display = "block";
+        let winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+        const data = {
+            dr: ["DOCTOR 🏥", "YOU SAVE LIVES!", "👨‍⚕️"],
+            tea: ["TEACHER 🏫", "YOU ARE A GENIUS!", "🧑‍🏫"],
+            dan: ["DANCER 💃", "YOU ARE A STAR!", "✨"],
+            pol: ["POLITICIAN 🏛️", "YOU RUN THE WORLD!", "🗳️"],
+            sol: ["SOLDIER 🎖️", "YOU ARE A LEGEND!", "🛡️"]
+        };
+        document.getElementById("res-title").innerText = data[winner][0];
+        document.getElementById("res-desc").innerText = data[winner][1];
+        document.getElementById("res-icon").innerText = data[winner][2];
+        // Final massive celebration
+        var duration = 3 * 1000;
+        var end = Date.now() + duration;
+        (function frame() {
+            confetti({ particleCount: 7, angle: 60, spread: 55, origin: { x: 0 } });
+            confetti({ particleCount: 7, angle: 120, spread: 55, origin: { x: 1 } });
+            if (Date.now() < end) { requestAnimationFrame(frame); }
+        }());
+    }
+</script>
+</body>
+</html>
