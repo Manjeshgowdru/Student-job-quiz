@@ -3,16 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>⚡ EPIC CAREER QUIZ ⚡</title>
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>🚀 Find Your Perfect IT Career - Interactive Quiz | ADUI</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover your perfect IT career! Take our interactive quiz to find if you're meant to be a Data Analyst, Web Developer, Security Specialist, or more! Join 5,000+ students who found their path.">
+    <meta name="keywords" content="career quiz, IT careers, tech jobs, computer science, ADUI, career test, web developer, data analyst, cybersecurity">
+    <meta name="author" content="ADUI - DAM Team">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Find Your Perfect IT Career - Interactive Quiz">
+    <meta property="og:description" content="Take this fun quiz to discover which IT career suits you best! 🎮💻🔒">
+    <meta property="og:url" content="https://yourwebsite.com">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Find Your Perfect IT Career - Interactive Quiz">
+    <meta name="twitter:description" content="Discover your dream IT job in 2 minutes! 🚀">
+    
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            -webkit-tap-highlight-color: transparent;
+        }
         body { 
             font-family: 'Arial Black', sans-serif; 
             background: #000;
-            overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 100vh;
+            overflow-x: hidden; 
+            overflow-y: auto;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh;
             position: relative;
+            padding: 20px 0;
         }
+        
         /* Crazy Animated Background */
         body::before {
             content: '';
@@ -29,11 +62,13 @@
             opacity: 0.3;
             z-index: 0;
         }
+        
         @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        
         /* Floating Neon Circles */
         .bg-circle {
             position: fixed;
@@ -43,44 +78,18 @@
             z-index: 0;
             animation: float 20s infinite ease-in-out;
         }
-        .circle1 {
-            width: 300px;
-            height: 300px;
-            background: #ff00ff;
-            top: 10%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-        .circle2 {
-            width: 400px;
-            height: 400px;
-            background: #00ff00;
-            bottom: 10%;
-            right: 10%;
-            animation-delay: 5s;
-        }
-        .circle3 {
-            width: 250px;
-            height: 250px;
-            background: #00ffff;
-            top: 50%;
-            left: 50%;
-            animation-delay: 10s;
-        }
-        .circle4 {
-            width: 350px;
-            height: 350px;
-            background: #ffff00;
-            bottom: 30%;
-            left: 20%;
-            animation-delay: 15s;
-        }
+        .circle1 { width: 300px; height: 300px; background: #ff00ff; top: 10%; left: 10%; animation-delay: 0s; }
+        .circle2 { width: 400px; height: 400px; background: #00ff00; bottom: 10%; right: 10%; animation-delay: 5s; }
+        .circle3 { width: 250px; height: 250px; background: #00ffff; top: 50%; left: 50%; animation-delay: 10s; }
+        .circle4 { width: 350px; height: 350px; background: #ffff00; bottom: 30%; left: 20%; animation-delay: 15s; }
+        
         @keyframes float {
             0%, 100% { transform: translate(0, 0) scale(1); }
             25% { transform: translate(50px, -50px) scale(1.1); }
             50% { transform: translate(-30px, 50px) scale(0.9); }
             75% { transform: translate(30px, 30px) scale(1.05); }
         }
+        
         /* Grid Pattern */
         .grid-overlay {
             position: fixed;
@@ -95,6 +104,7 @@
             z-index: 1;
             pointer-events: none;
         }
+        
         /* Floating Tech Icons */
         .tech-icon {
             position: fixed;
@@ -112,60 +122,431 @@
         .icon6 { top: 60%; right: 10%; color: #00ff00; animation-delay: 15s; }
         .icon7 { top: 35%; left: 30%; color: #00ffff; animation-delay: 18s; }
         .icon8 { bottom: 40%; right: 25%; color: #ffff00; animation-delay: 21s; }
+        
         @keyframes floatIcons {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
             25% { transform: translate(30px, -40px) rotate(90deg); }
             50% { transform: translate(-20px, 40px) rotate(180deg); }
             75% { transform: translate(40px, 20px) rotate(270deg); }
         }
+        
         .container { 
-            background: #1a1a1a; width: 95%; max-width: 420px; padding: 40px 20px; border-radius: 0px; 
-            border: 5px solid #00ff00; /* Neon Green border */
-            box-shadow: 15px 15px 0px #ff00ff; /* Neo-brutalist pink shadow */
-            text-align: center; position: relative; color: #fff;
+            background: #1a1a1a; 
+            width: 100%; 
+            max-width: 500px; 
+            padding: 30px 20px; 
+            border-radius: 0px; 
+            border: 4px solid #00ff00;
+            box-shadow: 10px 10px 0px #ff00ff;
+            text-align: center; 
+            position: relative; 
+            color: #fff;
             z-index: 10;
+            margin: 10px;
         }
+        
         /* Glitch Animation for Title */
-        .glitch { font-size: 38px; color: #fff; text-transform: uppercase; animation: glitch 1s linear infinite; }
+        .glitch { 
+            font-size: 32px; 
+            color: #fff; 
+            text-transform: uppercase; 
+            animation: glitch 1s linear infinite;
+            line-height: 1.3;
+            margin-bottom: 15px;
+        }
+        
         @keyframes glitch {
             2%, 64% { transform: translate(2px,0) skew(0deg); }
             4%, 60% { transform: translate(-2px,0) skew(0deg); }
             62% { transform: translate(0,0) skew(5deg); }
         }
+        
         .presented-by {
-            font-size: 16px;
+            font-size: 14px;
             color: #00ff00;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             margin-bottom: 20px;
             font-weight: bold;
+            line-height: 1.5;
         }
+        
         input { 
-            width: 100%; padding: 20px; margin: 20px 0; border: 4px solid #fff; background: transparent; 
-            color: #00ff00; font-size: 20px; border-radius: 0;
+            width: 100%; 
+            padding: 18px; 
+            margin: 12px 0; 
+            border: 3px solid #fff; 
+            background: transparent; 
+            color: #00ff00; 
+            font-size: 16px;
+            border-radius: 0;
+            -webkit-appearance: none;
+            appearance: none;
+            touch-action: manipulation;
         }
+        
+        input::placeholder {
+            color: #666;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        }
+        
         .btn { 
-            padding: 22px; border: none; font-size: 22px; font-weight: 900; cursor: pointer; 
-            width: 100%; text-transform: uppercase; transition: 0.1s; margin-top: 15px;
+            padding: 18px; 
+            border: none; 
+            font-size: 18px; 
+            font-weight: 900; 
+            cursor: pointer; 
+            width: 100%; 
+            text-transform: uppercase; 
+            transition: 0.1s; 
+            margin-top: 12px;
+            min-height: 60px;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
         }
-        .btn:active { transform: translate(5px, 5px); box-shadow: none; }
-        .btn-yes { background: #00ff00; color: #000; box-shadow: 8px 8px 0 #006600; }
-        .btn-maybe { background: #ffff00; color: #000; box-shadow: 8px 8px 0 #999900; }
-        .btn-no { background: #ff00ff; color: #fff; box-shadow: 8px 8px 0 #660066; }
+        
+        .btn:active { 
+            transform: translate(3px, 3px); 
+            box-shadow: 3px 3px 0 !important; 
+        }
+        .btn-yes { background: #00ff00; color: #000; box-shadow: 6px 6px 0 #006600; }
+        .btn-maybe { background: #ffff00; color: #000; box-shadow: 6px 6px 0 #999900; }
+        .btn-no { background: #ff00ff; color: #fff; box-shadow: 6px 6px 0 #660066; }
+        
         #quiz-screen, #result-screen { display: none; }
-        .job-icon { font-size: 100px; filter: drop-shadow(0 0 20px #fff); margin: 20px 0; }
+        
+        #q-text {
+            font-size: 22px !important;
+            line-height: 1.4 !important;
+            margin: 25px 0 !important;
+            padding: 0 5px;
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            background: #333;
+            height: 12px;
+            margin: 15px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #00ff00;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #00ff00, #00ffff);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 10px #00ff00;
+        }
+        
+        .progress-text {
+            font-size: 13px;
+            color: #00ff00;
+            margin-top: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .job-icon { 
+            font-size: 80px; 
+            filter: drop-shadow(0 0 20px #fff); 
+            margin: 15px 0; 
+        }
+        
+        #res-title {
+            font-size: 26px !important;
+            color: #00ff00 !important;
+            line-height: 1.3 !important;
+            margin-bottom: 10px !important;
+        }
+        
+        #res-desc {
+            font-size: 18px !important;
+            margin: 15px 0 !important;
+            line-height: 1.4 !important;
+        }
+        
+        /* CTA Box */
+        .cta-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border: 3px solid #00ff00;
+            box-shadow: 0 8px 25px rgba(0, 255, 0, 0.3);
+        }
+        
+        .cta-box h3 {
+            color: #fff;
+            font-size: 18px;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        
+        .cta-box p {
+            margin: 12px 0;
+            font-size: 13px;
+            color: #fff;
+            line-height: 1.4;
+        }
+        
+        .cta-link {
+            display: inline-block;
+            background: #00ff00;
+            color: #000;
+            padding: 15px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+            transition: 0.3s;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        
+        .cta-link:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 10px rgba(0, 255, 0, 0.3);
+        }
+        
+        /* Share Buttons */
+        .share-container {
+            margin: 20px 0;
+        }
+        
+        .share-container p {
+            font-size: 14px;
+            margin-bottom: 12px;
+            color: #00ffff;
+        }
+        
+        .share-btn {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            margin: 8px 0;
+            font-size: 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.2s;
+            touch-action: manipulation;
+            min-height: 50px;
+        }
+        
+        .share-twitter {
+            background: #1DA1F2;
+            color: #fff;
+        }
+        
+        .share-facebook {
+            background: #4267B2;
+            color: #fff;
+        }
+        
+        .share-btn:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+        
+        /* Career Details */
+        .career-details {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px dashed #00ff00;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            font-size: 13px;
+            line-height: 1.6;
+            text-align: left;
+        }
+        
+        .career-details p {
+            margin-bottom: 10px;
+        }
+        
+        .salary-info {
+            color: #ffff00;
+            font-weight: bold;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+        
+        /* Loading Screen */
+        #loading-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+        
+        .loading-text {
+            color: #00ff00;
+            font-size: 28px;
+            animation: glitch 1s infinite;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 1.3;
+        }
+        
+        .loading-spinner {
+            border: 5px solid #333;
+            border-top: 5px solid #00ff00;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Mobile Optimization - Already mobile-first above, these are just fine-tuning */
+        @media (max-width: 480px) {
+            .container { 
+                padding: 25px 15px;
+                border-width: 3px;
+                box-shadow: 8px 8px 0px #ff00ff;
+            }
+            
+            .glitch { 
+                font-size: 26px;
+            }
+            
+            .presented-by {
+                font-size: 12px;
+                letter-spacing: 1px;
+            }
+            
+            .presented-by a {
+                font-size: 24px !important;
+            }
+            
+            input {
+                font-size: 15px;
+                padding: 16px;
+            }
+            
+            .btn {
+                font-size: 16px;
+                padding: 16px;
+                min-height: 56px;
+            }
+            
+            #q-text {
+                font-size: 20px !important;
+            }
+            
+            .job-icon {
+                font-size: 70px;
+            }
+            
+            #res-title {
+                font-size: 24px !important;
+            }
+            
+            #res-desc {
+                font-size: 16px !important;
+            }
+            
+            .career-details {
+                font-size: 12px;
+                padding: 12px;
+            }
+            
+            .cta-box {
+                padding: 15px;
+            }
+            
+            .cta-box h3 {
+                font-size: 16px;
+            }
+            
+            .cta-link {
+                font-size: 14px;
+                padding: 12px 20px;
+            }
+            
+            .share-btn {
+                font-size: 14px;
+                padding: 14px 18px;
+            }
+            
+            .loading-text {
+                font-size: 24px;
+            }
+            
+            /* Make tech icons smaller and less intrusive on small screens */
+            .tech-icon {
+                font-size: 35px;
+                opacity: 0.1;
+            }
+            
+            /* Reduce background circle blur on mobile for better performance */
+            .bg-circle {
+                filter: blur(60px);
+            }
+        }
+        
+        /* Landscape phone orientation */
+        @media (max-height: 500px) and (orientation: landscape) {
+            body {
+                padding: 10px 0;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .glitch {
+                font-size: 22px;
+                margin-bottom: 10px;
+            }
+            
+            input {
+                padding: 12px;
+                margin: 8px 0;
+            }
+            
+            .btn {
+                padding: 12px;
+                margin-top: 8px;
+                min-height: 48px;
+            }
+            
+            #q-text {
+                font-size: 18px !important;
+                margin: 15px 0 !important;
+            }
+        }
     </style>
 </head>
 <body>
 
-<!-- Crazy Animated Background Elements -->
+<!-- Background Elements -->
 <div class="bg-circle circle1"></div>
 <div class="bg-circle circle2"></div>
 <div class="bg-circle circle3"></div>
 <div class="bg-circle circle4"></div>
 <div class="grid-overlay"></div>
 
-<!-- Floating Tech Icons -->
+<!-- Tech Icons -->
 <div class="tech-icon icon1">🤖</div>
 <div class="tech-icon icon2">💻</div>
 <div class="tech-icon icon3">🔐</div>
@@ -175,27 +556,82 @@
 <div class="tech-icon icon7">🧠</div>
 <div class="tech-icon icon8">⚡</div>
 
+<!-- Loading Screen -->
+<div id="loading-screen">
+    <div class="loading-text">CALCULATING YOUR FUTURE... ⚡</div>
+    <div class="loading-spinner"></div>
+</div>
+
 <div class="container">
+    <!-- Welcome Screen -->
     <div id="welcome-screen">
-        <div class="presented-by">Presented by DAM Team</div>
-        <h1 class="glitch">CAREER Goal⚡ </h1>
-        <input type="text" id="student-name" placeholder="YOUR NAME HERE">
-        <input type="number" id="student-age" placeholder="YOUR AGE">
-        <button class="btn btn-yes" onclick="startQuiz()">LFG! START! 🚀</button>
+        <div class="presented-by">
+            DISCOVER YOUR FUTURE ROLE AFTER<br>
+            <a href="https://studijne-programy.upjs.sk/program/ADUIb" target="_blank" 
+               style="color: #ffff00; font-size: 26px; text-decoration: none; border-bottom: 3px solid #ffff00; display: inline-block; margin-top: 8px;">
+                ADUI
+            </a>
+        </div>
+        
+        
+        <input type="text" id="student-name" placeholder="YOUR NAME HERE" required>
+        <input type="number" id="student-age" placeholder="YOUR AGE" min="14" max="99">
+        <input type="email" id="student-email" placeholder="YOUR EMAIL (OPTIONAL)">
+        
+        <button class="btn btn-yes" onclick="startQuiz()">LET'S START! 🚀</button>
+        
+        <p style="font-size: 12px; color: #888; margin-top: 15px;">
+            ⏱️ Takes only 2 minutes • 100% Free • No signup required
+        </p>
     </div>
 
+    <!-- Quiz Screen -->
     <div id="quiz-screen">
-        <div id="q-text" style="font-size: 26px; line-height: 1.2; margin-bottom: 30px;"></div>
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="progress-text" id="progress-text">Question 1 of 15</div>
+        
+        <div id="q-text"></div>
+        
         <button class="btn btn-yes" onclick="answer(3)">YES! 😍</button>
         <button class="btn btn-maybe" onclick="answer(2)">MAYBE 😐</button>
         <button class="btn btn-no" onclick="answer(1)">NO ❌</button>
     </div>
 
+    <!-- Result Screen -->
     <div id="result-screen">
         <div class="job-icon" id="res-icon"></div>
-        <h2 id="res-title" style="font-size: 32px; color: #00ff00;"></h2>
-        <p id="res-desc" style="font-size: 20px; margin: 15px 0;"></p>
-        <button class="btn btn-yes" onclick="location.reload()">REPLAY 🔄</button>
+        <h2 id="res-title"></h2>
+        <p id="res-desc"></p>
+        
+        <div class="career-details" id="career-details"></div>
+        
+        <!-- Share Section -->
+        <div class="share-container">
+            <p>📢 SHARE YOUR RESULT!</p>
+            <button class="share-btn share-twitter" onclick="shareOnTwitter()">
+                SHARE ON 𝕏 🐦
+            </button>
+            <button class="share-btn share-facebook" onclick="shareOnFacebook()">
+                SHARE ON FACEBOOK 📘
+            </button>
+        </div>
+        
+        <!-- CTA Box -->
+        <div class="cta-box">
+            <h3>✨ READY TO MAKE THIS YOUR REALITY?</h3>
+            <p>ADUI graduates are working in this position RIGHT NOW!</p>
+            <a href="https://studijne-programy.upjs.sk/program/ADUIb" target="_blank" class="cta-link">
+                EXPLORE ADUI PROGRAM 🎓
+            </a>
+        </div>
+        
+        <button class="btn btn-yes" onclick="location.reload()">TAKE QUIZ AGAIN 🔄</button>
+        
+        <p style="font-size: 11px; color: #888; margin-top: 20px; line-height: 1.4;">
+            Made with 💚 by DAM Team
+        </p>
     </div>
 </div>
 
@@ -221,88 +657,209 @@
     let step = 0;
     let scores = { security:0, data:0, webdev:0, tester:0, multimedia:0 };
     let userName = "";
+    let userEmail = "";
+    let startTime = Date.now();
 
     function fireConfetti() {
-        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#00ff00', '#ff00ff', '#ffff00'] });
+        confetti({ 
+            particleCount: 30, 
+            spread: 100, 
+            origin: { y: 0.6 }, 
+            colors: ['#00ff00', '#ff00ff', '#ffff00'] 
+        });
     }
 
     function startQuiz() {
         userName = document.getElementById("student-name").value || "PLAYER";
+        userEmail = document.getElementById("student-email").value;
+        
+        if (!userName || userName === "PLAYER") {
+            alert("Please enter your name! 😊");
+            return;
+        }
+        
         document.getElementById("welcome-screen").style.display = "none";
         document.getElementById("quiz-screen").style.display = "block";
         document.getElementById("q-text").innerText = questions[0];
-        fireConfetti(); // Start with a bang!
+        updateProgress();
+        fireConfetti();
+        
+        // Track quiz start
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'quiz_started', {
+                'event_category': 'engagement',
+                'event_label': userName
+            });
+        }
+    }
+
+    function updateProgress() {
+        const progress = ((step + 1) / questions.length) * 100;
+        document.getElementById("progress-bar").style.width = progress + "%";
+        document.getElementById("progress-text").innerText = `Question ${step + 1} of ${questions.length}`;
     }
 
     function answer(pts) {
-        // IT Security Specialist - Questions 1, 2, 3 (steps 0, 1, 2)
+        // Scoring logic
         if (step >= 0 && step <= 2) {
             scores.security += pts;
         }
-        // Data Analyst - Questions 4, 5, 6 (steps 3, 4, 5)
         else if (step >= 3 && step <= 5) {
             scores.data += pts;
         }
-        // Website Developer - Questions 7, 8, 9 (steps 6, 7, 8)
         else if (step >= 6 && step <= 8) {
             scores.webdev += pts;
         }
-        // IT Tester - Questions 10, 11, 12 (steps 9, 10, 11)
         else if (step >= 9 && step <= 11) {
             scores.tester += pts;
         }
-        // Multimedia Application Developer - Questions 13, 14, 15 (steps 12, 13, 14)
         else if (step >= 12 && step <= 14) {
             scores.multimedia += pts;
         }
 
-        fireConfetti(); // Explosion on every answer!
+        fireConfetti();
         step++;
+        
         if (step < questions.length) {
             document.getElementById("q-text").innerText = questions[step];
+            updateProgress();
         } else {
-            showResult();
+            showLoadingScreen();
         }
     }
 
-    function showResult() {
+    function showLoadingScreen() {
         document.getElementById("quiz-screen").style.display = "none";
+        document.getElementById("loading-screen").style.display = "flex";
+        
+        // Show loading for 2 seconds
+        setTimeout(() => {
+            document.getElementById("loading-screen").style.display = "none";
+            showResult();
+        }, 2000);
+    }
+
+    function showResult() {
         document.getElementById("result-screen").style.display = "block";
+        
         let winner = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+        
         const data = {
-            security: ["IT SECURITY SPECIALIST 🔒", "YOU PROTECT THE DIGITAL WORLD!", "🛡️"],
-            data: ["DATA ANALYST 📊", "YOU TURN DATA INTO INSIGHTS!", "📈"],
-            webdev: ["WEBSITE DEVELOPER 🌐", "YOU BUILD THE WEB!", "💻"],
-            tester: ["IT TESTER 🔍", "YOU ENSURE QUALITY!", "✅"],
-            multimedia: ["MULTIMEDIA APP DEVELOPER 🎮", "YOU CREATE AMAZING EXPERIENCES!", "🎨"]
+            security: {
+                title: "IT SECURITY SPECIALIST 🔒",
+                desc: "YOU PROTECT THE DIGITAL WORLD!",
+                icon: "🛡️",
+                details: "As a cybersecurity expert, you'll defend organizations from cyber threats, conduct security audits, and implement protective measures. You'll be the guardian of digital assets!",
+                salary: "💰 Average Salary: €40,000 - €80,000+ per year",
+                skills: "Skills needed: Network security, Ethical hacking, Risk analysis, Cryptography"
+            },
+            data: {
+                title: "DATA ANALYST 📊",
+                desc: "YOU TURN DATA INTO INSIGHTS!",
+                icon: "📈",
+                details: "Transform raw data into business intelligence! You'll work with AI, machine learning, and big data to help companies make smarter decisions.",
+                salary: "💰 Average Salary: €35,000 - €70,000+ per year",
+                skills: "Skills needed: SQL, Python, Statistics, Data visualization, Excel"
+            },
+            webdev: {
+                title: "WEBSITE DEVELOPER 🌐",
+                desc: "YOU BUILD THE WEB!",
+                icon: "💻",
+                details: "Create stunning websites and web applications! From e-commerce platforms to social networks, you'll bring ideas to life on the internet.",
+                salary: "💰 Average Salary: €35,000 - €75,000+ per year",
+                skills: "Skills needed: HTML/CSS, JavaScript, React, Backend development"
+            },
+            tester: {
+                title: "IT TESTER 🔍",
+                desc: "YOU ENSURE QUALITY!",
+                icon: "✅",
+                details: "Be the quality guardian! You'll find bugs before users do, ensure software works perfectly, and maintain high standards in tech products.",
+                salary: "💰 Average Salary: €30,000 - €60,000+ per year",
+                skills: "Skills needed: Test automation, Attention to detail, Problem-solving, QA tools"
+            },
+            multimedia: {
+                title: "MULTIMEDIA APP DEVELOPER 🎮",
+                desc: "YOU CREATE AMAZING EXPERIENCES!",
+                icon: "🎨",
+                details: "Combine creativity with technology! Build games, interactive apps, AR/VR experiences, and digital art that captivates millions.",
+                salary: "💰 Average Salary: €35,000 - €70,000+ per year",
+                skills: "Skills needed: Unity/Unreal, 3D modeling, Animation, Creative coding"
+            }
         };
         
-        const resultTitle = data[winner][0];
-        document.getElementById("res-title").innerText = resultTitle;
-        document.getElementById("res-desc").innerText = data[winner][1];
-        document.getElementById("res-icon").innerText = data[winner][2];
+        const result = data[winner];
+        document.getElementById("res-title").innerText = result.title;
+        document.getElementById("res-desc").innerText = result.desc;
+        document.getElementById("res-icon").innerText = result.icon;
+        
+        // Career details
+        document.getElementById("career-details").innerHTML = `
+            <p><strong>What you'll do:</strong></p>
+            <p>${result.details}</p>
+            <p class="salary-info">${result.salary}</p>
+            <p style="margin-top: 10px; font-size: 12px; color: #00ffff;">${result.skills}</p>
+        `;
+        
+        // Calculate completion time
+        const timeSpent = Math.round((Date.now() - startTime) / 1000);
         
         // Save to Google Sheets
-        saveToGoogleSheets(userName, document.getElementById("student-age").value, resultTitle);
+        saveToGoogleSheets(userName, document.getElementById("student-age").value, result.title, userEmail, timeSpent);
         
-        // Final massive celebration
-        var duration = 3 * 1000;
+        // Track result
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'quiz_completed', {
+                'event_category': 'engagement',
+                'event_label': result.title,
+                'value': timeSpent
+            });
+        }
+        
+        // Final celebration
+        var duration = 1000;
         var end = Date.now() + duration;
         (function frame() {
-            confetti({ particleCount: 7, angle: 60, spread: 55, origin: { x: 0 } });
-            confetti({ particleCount: 7, angle: 120, spread: 55, origin: { x: 1 } });
+            confetti({ particleCount: 2, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#00ff00', '#ff00ff'] });
+            confetti({ particleCount: 2, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#00ffff', '#ffff00'] });
             if (Date.now() < end) { requestAnimationFrame(frame); }
         }());
     }
 
-    function saveToGoogleSheets(name, age, career) {
-        // Replace this URL with your Google Apps Script Web App URL
+    function shareOnTwitter() {
+        const title = document.getElementById("res-title").innerText;
+        const text = `I just discovered I'm a ${title}! 🚀 Find your IT career path with ADUI:`;
+        const url = window.location.href;
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+        
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'share', {
+                'event_category': 'social',
+                'event_label': 'twitter'
+            });
+        }
+    }
+
+    function shareOnFacebook() {
+        const url = window.location.href;
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+        
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'share', {
+                'event_category': 'social',
+                'event_label': 'facebook'
+            });
+        }
+    }
+
+    function saveToGoogleSheets(name, age, career, email, timeSpent) {
         const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE';
         
         const formData = new FormData();
         formData.append('name', name);
         formData.append('age', age || 'Not provided');
         formData.append('career', career);
+        formData.append('email', email || 'Not provided');
+        formData.append('time_spent', timeSpent);
         formData.append('timestamp', new Date().toLocaleString());
         
         fetch(GOOGLE_SCRIPT_URL, {
@@ -313,6 +870,19 @@
         .then(data => console.log('Saved to Google Sheets:', data))
         .catch(error => console.log('Error saving to Google Sheets:', error));
     }
+
 </script>
+
+<!-- Google Analytics (Replace YOUR-GA-ID with your actual Google Analytics ID) -->
+<!-- 
+<script async src="https://www.googletagmanager.com/gtag/js?id=YOUR-GA-ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'YOUR-GA-ID');
+</script>
+-->
+
 </body>
 </html>
